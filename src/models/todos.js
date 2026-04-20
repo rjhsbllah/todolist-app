@@ -24,3 +24,4 @@ const todoSchema = new mongoose.Schema(
 );
 
 const todos = mongoose.model("todolist", todoSchema, "todolist");
+export default todos;

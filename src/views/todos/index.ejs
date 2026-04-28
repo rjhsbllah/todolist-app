@@ -1,0 +1,74 @@
+<!-- HERO -->
+<section id="hero" class="py-2 text-center bg-light">
+  <div class="container">
+    <h1 class="fw-bold mb-2">Kelola Tugasmu Lebih Mudah</h1>
+    <p class="text-muted">
+      To Do List sederhana untuk membantu produktivitas harianmu
+    </p>
+  </div>
+</section>
+
+<section id="fitur" class="py-2 bg-light">
+  <div class="container d-flex justify-content-center">
+    <div class="card shadow-lg border-0 rounded-4 w-100" style="max-width: 700px;">
+      <div class="card-body p-4 p-md-5 bg-primary text-white rounded-4">
+        <h2 class="text-center mb-4 fw-semibold">To-Do List App</h2>
+        <button class="btn btn-light w-100 mb-4 fw-semibold" onclick="openAddModal()">
+        + Tambah Tugas
+        </button>
+        <div class="border rounded-3 p-3 bg-white shadow-sm">
+          <h6 class="mb-3 text-muted">Daftar Tugas</h6>
+          <ol class="list-group list-group-numbered">
+            <% data.forEach(todo => { %>
+              <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold"><%= todo.title %></div>
+                  <small class="text-muted"><%= todo.description %></small><br/>
+                  <% if (todo.dueDate) { %>
+                    <small class="text-secondary">
+                      Deadline: <%= new Date(todo.dueDate).toLocaleDateString() %>
+                    </small><br/>
+                  <% } %>
+
+                  <% if (todo.completed) { %>
+                    <span class="badge bg-success mt-1">Selesai</span>
+                  <% } else { %>
+                    <span class="badge bg-warning text-dark mt-1">Belum</span>
+                  <% } %>
+                </div>
+                <div class="d-flex flex-column flex-md-row gap-2 mt-2 mt-md-0">
+                    <button 
+                        class="btn btn-sm <%= todo.completed ? 'btn-success' : 'btn-outline-success' %> w-100"
+                        onclick="toggleComplete('<%= todo._id %>')"
+                    >
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+                    <button 
+                        class="btn btn-sm btn-warning w-100"
+                        onclick="openEditModal('<%= todo._id %>', '<%= todo.title %>', '<%= todo.description %>')"
+                    >
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </button>
+                    <form 
+                        id="delete-form-<%= todo._id %>" 
+                        action="/todos/<%= todo._id %>?_method=DELETE" 
+                        method="POST"
+                        class="w-100"
+                    >
+                        <button 
+                        type="button"
+                        class="btn btn-sm btn-danger w-100"
+                        onclick="confirmDelete('<%= todo._id %>')"
+                        >
+                        <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </form>
+                </div>
+              </li>
+            <% }) %>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

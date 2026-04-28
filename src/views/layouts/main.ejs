@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>To Do List</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
+  </head>
+
+  <body>
+    <!-- nav -->
+    <%- include('../partials/navbar') %>
+    <main><%- body %></main>
+
+    <!-- footer -->
+    <%- include('../partials/footer') %>
+    <!-- edit modal todos -->
+    <%- include('../partials/editTodosModal') %>
+    <!-- create modal todos -->
+    <%- include('../partials/createTodosModal') %>
+
+    <script src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/bootstrap/js/editModal.js"></script>
+    <script src="/assets/bootstrap/js/deleteModal.js"></script>
+    <script src="/assets/bootstrap/js/createModal.js"></script>
+    <script src="/assets/bootstrap/js/buttonCompleted.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      const success = <%- JSON.stringify(success) %>;
+      const error = <%- JSON.stringify(error) %>;
+
+      if (success && success.length > 0) {
+        Swal.fire({
+          icon: "success",
+          title: "Berhasil",
+          text: success[0],
+        });
+      }
+
+      if (error && error.length > 0) {
+        Swal.fire({
+          icon: "error",
+          title: "Gagal",
+          text: error[0],
+        });
+      }
+    </script>
+  </body>
+</html>

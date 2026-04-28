@@ -1,0 +1,50 @@
+<div class="modal fade" id="addModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow">
+      <div class="modal-header">
+        <h5 class="modal-title fw-semibold">Tambah Tugas</h5>
+        <button
+          type="button"
+          class="btn-close"
+          onclick="closeAddModal()"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <form id="add-form">
+          <label class="form-label">Judul</label>
+          <input
+            type="text"
+            id="add-title"
+            class="form-control mb-2 border-primary"
+            required
+          />
+
+          <label class="form-label">Deskripsi</label>
+          <input
+            type="text"
+            id="add-desc"
+            class="form-control mb-2 border-primary"
+            required
+          />
+
+          <label class="form-label">Deadline</label>
+          <input
+            type="date"
+            id="add-date"
+            class="form-control border-primary"
+          />
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" onclick="closeAddModal()">
+          <i class="fa-solid fa-xmark"></i> Batal
+        </button>
+        <button class="btn btn-primary px-4" onclick="submitAdd()">
+          <i class="fa-regular fa-floppy-disk"></i> Simpan
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

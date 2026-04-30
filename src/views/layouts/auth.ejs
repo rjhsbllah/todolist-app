@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Auth</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/bootstrap/css/auth.css" />
+  </head>
+
+  <body>
+    <main><%- body %></main>
+
+    <script src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/bootstrap/js/auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      const success = <%- JSON.stringify(success || []) %>;
+      const error = <%- JSON.stringify(error || []) %>;
+
+      if (success.length > 0) {
+        Swal.fire({
+          icon: "success",
+          title: "Berhasil",
+          text: success[0],
+        });
+      }
+
+      if (error.length > 0) {
+        Swal.fire({
+          icon: "error",
+          title: "Gagal",
+          text: error[0],
+        });
+      }
+    </script>
+  </body>
+</html>

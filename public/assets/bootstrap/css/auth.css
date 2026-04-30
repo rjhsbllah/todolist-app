@@ -375,3 +375,81 @@ body {
     background-position: 0% 50%;
   }
 }
+/* =========================
+   GLOBAL FIX (WAJIB)
+========================= */
+
+/* biar bisa scroll di mobile */
+html,
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* jangan paksa tinggi */
+.row {
+  min-height: 100vh;
+}
+
+/* =========================
+   MOBILE FIX
+========================= */
+
+@media only screen and (max-width: 768px) {
+  /* container aman */
+  .container-auth {
+    overflow: visible;
+  }
+
+  /* background jangan nutup */
+  .container-auth::before {
+    width: 100%;
+    transform: none;
+    right: 0;
+    border-radius: 0;
+  }
+
+  /* ubah jadi column */
+  .row {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* col jadi full */
+  .col {
+    width: 100%;
+    position: relative; /* ❗ ini penting (hapus absolute behavior) */
+    transform: none !important;
+    padding: 1.5rem;
+    background: transparent;
+  }
+
+  /* form lebih rapih */
+  .form-wrapper {
+    max-width: 100%;
+  }
+
+  .form {
+    transform: scale(1) !important;
+    margin: 1rem 0;
+  }
+
+  /* text jangan kegedean */
+  .text h2 {
+    font-size: 2rem;
+  }
+
+  /* sembunyikan ilustrasi kalau perlu */
+  .img img {
+    width: 60%;
+  }
+
+  /* hilangkan animasi berlebihan */
+  .text.sign-in h2,
+  .text.sign-up h2,
+  .img.sign-in img,
+  .img.sign-up img {
+    transform: none !important;
+  }
+}

@@ -12,22 +12,22 @@
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
   </head>
 
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <!-- nav -->
     <%- include('../partials/navbar') %>
-    <main><%- body %></main>
+    <main class="flex-grow-1"><%- body %></main>
 
-    <!-- footer -->
-    <%- include('../partials/footer') %>
     <!-- edit modal todos -->
     <%- include('../partials/editTodosModal') %>
     <!-- create modal todos -->
     <%- include('../partials/createTodosModal') %>
-
+    <!-- footer -->
+    <%- include('../partials/footer') %>
     <script src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/bootstrap/js/editModal.js"></script>
     <script src="/assets/bootstrap/js/deleteModal.js"></script>
     <script src="/assets/bootstrap/js/createModal.js"></script>
+    <script src="/assets/bootstrap/js/countdownDeadline.js"></script>
     <script src="/assets/bootstrap/js/buttonCompleted.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>

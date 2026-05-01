@@ -18,16 +18,18 @@ const __dirname = path.dirname(__filename);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-// ✅ GLOBAL SETUP (HANYA SEKALI)
 applyAppMiddleware(app);
 
-// ✅ cookie parser
 app.use(cookieParser());
 
-// flash locals
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
+  next();
+});
+
+app.use((req, res, next) => {
+  res.locals.user = req.user || null;
   next();
 });
 

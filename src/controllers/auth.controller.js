@@ -3,16 +3,21 @@ import { hashPassword, comparePassword } from "../helpers/bcrypt.js";
 import { generateToken } from "../helpers/jwt.js";
 
 // show auth page
-export const showAuthPage = (req, res) => {
+const showAuthPage = (req, res) => {
   res.render("auth/auth", {
     layout: "layouts/auth",
   });
 };
 
 // register
-export const register = async (req, res) => {
+const register = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, confirmPassword } = req.body;
+
+    if (password !== confirmPassword) {
+      req.flash("error", "Password tidak sama");
+      return res.redirect("/register");
+    }
 
     const hashedPassword = await hashPassword(password);
 
@@ -30,7 +35,7 @@ export const register = async (req, res) => {
 };
 
 // login
-export const login = async (req, res) => {
+const login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
@@ -61,9 +66,85 @@ export const login = async (req, res) => {
 };
 
 // logout
-export const logout = (req, res) => {
+const logout = (req, res) => {
   res.clearCookie("token");
-
   req.flash("success", "Berhasil logout");
   res.redirect("/login");
+};
+
+// update username
+const updateUsername = async (req, res) => {
+  try {
+    const { username } = req.body;
+
+    if (!username) {
+      req.flash("error", "Username tidak boleh kosong");
+      return res.redirect("/profile");
+    }
+
+    const existing = await User.findOne({ username });
+    if (existing) {
+      req.flash("error", "Username sudah digunakan");
+      return res.redirect("/profile");
+    }
+
+    await User.findByIdAndUpdate(req.user.id, { username });
+
+    const updatedUser = await User.findById(req.user.id);
+    const newToken = generateToken(updatedUser);
+
+    res.cookie("token", newToken, {
+      httpOnly: true,
+      sameSite: "strict",
+    });
+
+    req.flash("success", "Username berhasil diubah");
+    res.redirect("/profile");
+  } catch (err) {
+    req.flash("error", "Gagal update username");
+    res.redirect("/profile");
+  }
+};
+
+// update password
+const updatePassword = async (req, res) => {
+  try {
+    const { oldPassword, newPassword, confirmPassword } = req.body;
+
+    const user = await User.findById(req.user.id);
+
+    const isMatch = await comparePassword(oldPassword, user.password);
+    if (!isMatch) {
+      req.flash("error", "Password lama salah");
+      return res.redirect("/profile");
+    }
+
+    if (newPassword !== confirmPassword) {
+      req.flash("error", "Password tidak sama");
+      return res.redirect("/profile");
+    }
+
+    const hashed = await hashPassword(newPassword);
+
+    await User.findByIdAndUpdate(req.user.id, {
+      password: hashed,
+    });
+
+    req.flash("success", "Password berhasil diubah, silakan login ulang");
+
+    res.clearCookie("token");
+    res.redirect("/login");
+  } catch (err) {
+    req.flash("error", "Gagal update password");
+    res.redirect("/profile");
+  }
+};
+
+export {
+  showAuthPage,
+  register,
+  login,
+  logout,
+  updateUsername,
+  updatePassword,
 };

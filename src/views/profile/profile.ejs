@@ -1,0 +1,90 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <!-- CARD -->
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-4">
+          <h4 class="fw-bold mb-4 text-center">
+            <i class="fa-solid fa-user-gear me-2"></i>
+            Profile Settings
+          </h4>
+
+          <form action="/profile/username" method="POST" class="mb-4">
+            <label class="form-label fw-medium">Username</label>
+
+            <div class="input-group">
+              <span class="input-group-text">
+                <i class="fa-solid fa-user"></i>
+              </span>
+              <input
+                type="text"
+                name="username"
+                class="form-control"
+                placeholder="Enter new username"
+                required
+              />
+            </div>
+
+            <button class="btn btn-primary w-100 mt-3">Update Username</button>
+          </form>
+
+          <hr />
+
+          <form action="/profile/password" method="POST">
+            <label class="form-label fw-medium">Password Lama</label>
+            <div class="input-group mb-2 password-field">
+              <span class="input-group-text">
+                <i class="fa-solid fa-lock"></i>
+              </span>
+              <input
+                type="password"
+                name="oldPassword"
+                class="form-control"
+                required
+              />
+              <span class="input-group-text toggle-password">
+                <i class="fa-solid fa-eye-slash"></i>
+              </span>
+            </div>
+
+            <!-- NEW PASSWORD -->
+            <label class="form-label fw-medium mt-2">Password Baru</label>
+            <div class="input-group mb-2 password-field">
+              <span class="input-group-text">
+                <i class="fa-solid fa-key"></i>
+              </span>
+              <input
+                type="password"
+                name="newPassword"
+                class="form-control"
+                required
+              />
+              <span class="input-group-text toggle-password">
+                <i class="fa-solid fa-eye-slash"></i>
+              </span>
+            </div>
+
+            <!-- CONFIRM PASSWORD -->
+            <label class="form-label fw-medium mt-2">Confirm Password</label>
+            <div class="input-group mb-2 password-field">
+              <span class="input-group-text">
+                <i class="fa-solid fa-check"></i>
+              </span>
+              <input
+                type="password"
+                name="confirmPassword"
+                class="form-control"
+                required
+              />
+              <span class="input-group-text toggle-password">
+                <i class="fa-solid fa-eye-slash"></i>
+              </span>
+            </div>
+
+            <button class="btn btn-danger w-100 mt-3">Update Password</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

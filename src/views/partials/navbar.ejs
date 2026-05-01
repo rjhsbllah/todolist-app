@@ -22,16 +22,41 @@
           </a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link fw-medium" href="/profile">
-            <i class="fa-solid fa-user me-1"></i> Profile
-          </a>
-        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle fw-medium d-flex align-items-center gap-2"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+          >
+            <i class="fa-solid fa-user"></i>
 
-        <li class="nav-item">
-          <a class="nav-link fw-medium" href="/logout">
-            <i class="fa-solid fa-right-from-bracket"></i> logout
+            <span class="ms-1 text-truncate" style="max-width: 120px">
+              <%= user ? user.username : "User" %>
+            </span>
           </a>
+
+          <ul class="dropdown-menu dropdown-menu-end shadow dropdown-light">
+            <li class="text-center p-3 border-bottom">
+              <p class="mb-0 fw-semibold">
+                <%= user ? user.username : "User" %>
+              </p>
+              <small class="text-muted">Welcome back</small>
+            </li>
+
+            <li><hr class="dropdown-divider" /></li>
+
+            <li>
+              <a href="/profile" class="dropdown-item">
+                <i class="fa-solid fa-user-gear me-2"></i> Profile Settings
+              </a>
+            </li>
+            <li>
+              <a href="/logout" class="dropdown-item text-danger">
+                <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+              </a>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>

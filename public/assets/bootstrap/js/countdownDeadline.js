@@ -1,9 +1,20 @@
+function getWIBTime() {
+  const now = new Date();
+
+  // offset dalam menit
+  const localOffset = now.getTimezoneOffset();
+  const wibOffset = 7 * 60;
+
+  return new Date(now.getTime() + (wibOffset + localOffset) * 60000);
+}
+
 function updateCountdown() {
   const elements = document.querySelectorAll(".countdown");
 
   elements.forEach((el) => {
-    const deadline = new Date(el.dataset.deadline);
-    const now = new Date();
+    // pastikan deadline dianggap WIB
+    const deadline = new Date(el.dataset.deadline + " GMT+0700");
+    const now = getWIBTime();
 
     const diff = deadline - now;
 
@@ -22,8 +33,5 @@ function updateCountdown() {
   });
 }
 
-// update tiap 1 detik
 setInterval(updateCountdown, 1000);
-
-// jalankan pertama kali
 updateCountdown();

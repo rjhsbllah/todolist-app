@@ -55,7 +55,11 @@ const login = async (req, res) => {
 
     const token = generateToken(user);
 
-    res.cookie("token", token, { httpOnly: true });
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
 
     req.flash("success", "Login berhasil");
     res.redirect("/todos");

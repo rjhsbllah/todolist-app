@@ -35,8 +35,10 @@
                   <small class="text-muted"><%= todo.description %></small><br/>
                   <% if (dueDate) { %>
                     <small class="text-secondary">
-                      Deadline: <%= dueDate.toLocaleDateString() %>
+                      Deadline: 
+                      <%= dueDate.toLocaleString("id-ID", { timeZone: "Asia/Jakarta" }) %>
                     </small><br/>
+
                     <small 
                       class="text-info countdown" 
                       data-deadline="<%= dueDate.toISOString() %>"
